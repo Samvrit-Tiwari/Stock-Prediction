@@ -1,0 +1,16 @@
+Ticker,Sector,Annualised_Return_%,Annualised_Volatility_%,Sharpe_Ratio,Beta_vs_NIFTY50,Max_Drawdown_%,SMA_50,SMA_200,Signal,Last_Crossover_Date
+HDFCBANK (B),Banking,5.81,19.8,-0.035,1.039,-19.91,877.13,805.41,Golden Cross,19-06-2024
+ICICIBANK (B),Banking,20.81,18.34,0.78,0.97,-9.45,1283.17,1189.13,Golden Cross,No crossover
+SBIN (B),Banking,16.51,25.57,0.391,1.391,-17.48,811.96,795.25,Golden Cross,No crossover
+KOTAKBANK (B),Banking,-1.01,20.47,-0.367,0.863,-23.15,351.79,353.39,Death Cross,26-12-2024
+AXISBANK (B),Banking,6.62,21.9,0.006,1.06,-19.18,1143.2,1160.5,Death Cross,12-12-2024
+TCS (I),IT,15.58,19.71,0.461,0.747,-13.17,3988.15,3898.83,Golden Cross,No crossover
+INFY (I),IT,14.74,23.09,0.357,0.902,-24.34,1824.44,1650.15,Golden Cross,12-07-2024
+WIPRO (I),IT,24.99,24.15,0.766,1.073,-19.53,272.5,244.27,Golden Cross,No crossover
+HCLTECH (I),IT,42.71,21.37,1.695,0.787,-21.66,1793.46,1560.2,Golden Cross,22-07-2024
+TECHM (I),IT,35.36,25.16,1.147,0.873,-16.22,1666.05,1441.97,Golden Cross,No crossover
+SUNPHARMA (P),Pharma,40.23,17.37,1.942,0.473,-12.24,1789.58,1662.53,Golden Cross,No crossover
+DRREDDY (P),Pharma,29.85,19.45,1.201,0.429,-15.61,1264.83,1268.54,Death Cross,13-12-2024
+CIPLA (P),Pharma,21.12,24.07,0.607,0.332,-20.77,1486.84,1493.14,Death Cross,24-12-2024
+DIVISLAB (P),Pharma,36.61,26.26,1.147,0.453,-21.45,5902.24,4851.42,Golden Cross,16-05-2024
+APOLLOHOSP (P),Pharma,29.26,21.74,1.047,0.564,-14.87,7056.82,6565.78,Golden Cross,No crossover

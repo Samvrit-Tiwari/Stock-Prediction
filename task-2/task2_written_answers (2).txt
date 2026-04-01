@@ -1,0 +1,15 @@
+
+TASK 2 WRITTEN ANSWERS
+======================
+
+1) Stock that appears mispriced relative to sector peers:
+HCLTECH (IT)
+
+Draft answer:
+On the risk-return chart, HCLTECH appears mispriced relative to other IT stocks because it delivers a stronger annualised return without a proportionate increase in volatility. Its position lies above the sector’s average risk-return tradeoff, which suggests the market may not be fully pricing in its recent performance quality. This does not prove undervaluation, but within this two-year window it looks more attractive than peers on a risk-adjusted basis.
+
+2) Two most correlated stocks:
+TCS and INFY | correlation = 0.69
+
+Draft answer:
+The two most correlated stocks are TCS and INFY, meaning their daily returns move very similarly over time. Holding both reduces diversification benefits, because if one falls due to sector or market pressure, the other is likely to fall in the same period as well.

@@ -1,0 +1,28 @@
+
+DATA QUALITY NOTE — Task 1 (PortfolioIQ, HackNova 1.0 2026)
+─────────────────────────────────────────────────────────────
+Period       : 01 January 2023 – 31 December 2024 (2 full calendar years)
+Source       : Yahoo Finance via yfinance Python library (auto_adjust=True)
+Frequency    : Daily OHLCV; Adjusted Close used for all return calculations
+Tickers      : 15 NSE stocks across Banking, IT, Pharma + Nifty 50 benchmark
+
+NSE Calendar : 493 expected trading days identified (2023–2024)
+  Built from  : All weekdays minus 29 official NSE weekday holidays
+  2023        : 15 weekday holidays | 2024: 14 weekday holidays
+  Max closure : 3 consecutive calendar days
+  Period      : 2023-04-07 → 2023-04-09
+  Reason      : Good Friday + surrounding weekend
+
+Hackathon Rule: No stock has >5 consecutive missing TRADING days — ✅ SATISFIED
+
+Missing Data Handling:
+  1. Forward-fill (limit=5): carries last known price for up to 5 consecutive
+     days — covers long weekends and multi-day holiday windows.
+  2. Back-fill (limit=2): resolves any nulls at the very start of the series.
+  After filling: 0 nulls remaining across all 16 tickers.
+
+All 8 test cases passed for all 16 tickers:
+  TC1 Ticker present | TC2 Start date ≥ 2023-01-01 | TC3 End date ≥ 2024-12-30
+  TC4 No negative prices | TC5 No extreme jumps (>50%) | TC6 Row count ±5%
+  TC7 Max 5 consec missing trading days | TC8 No zero-volume days (>95%)
+─────────────────────────────────────────────────────────────

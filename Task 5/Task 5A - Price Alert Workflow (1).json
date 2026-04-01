@@ -1,0 +1,122 @@
+{
+  "name": "Task 5A - Price Alert Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 17 * * 1-5"
+            }
+          ]
+        }
+      },
+      "id": "bce78972-09b0-4760-a4e8-580540451412",
+      "name": "Schedule Trigger1",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        752,
+        -176
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// MOCK API: Fetching the close prices for 3 monitored stocks.\n// This simulates the n8n data structure exactly.\n\nreturn [\n  {\n    \"json\": {\n      \"ticker\": \"RELIANCE\",\n      \"prevClose\": 2500,\n      \"currentClose\": 2565\n    }\n  },\n  {\n    \"json\": {\n      \"ticker\": \"TCS\",\n      \"prevClose\": 3500,\n      \"currentClose\": 3490\n    }\n  },\n  {\n    \"json\": {\n      \"ticker\": \"HDFCBANK\",\n      \"prevClose\": 1600,\n      \"currentClose\": 1545\n    }\n  }\n];"
+      },
+      "id": "123a56fb-f990-486a-9751-1649d59f7a93",
+      "name": "Fetch 3 Stocks (Mock)1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        896,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const alerts = [];\n\n// Loop through the 3 stocks passed from the previous node\nfor (const item of $input.all()) {\n  const stock = item.json;\n  \n  // Calculate percentage change\n  const percentChange = ((stock.currentClose - stock.prevClose) / stock.prevClose) * 100;\n\n  // Check if absolute change is strictly greater than 2%\n  if (Math.abs(percentChange) > 2) {\n    const icon = percentChange > 0 ? '📈 UP' : '📉 DOWN';\n    alerts.push(`${icon}: <strong>${stock.ticker}</strong> moved <strong>${Math.abs(percentChange).toFixed(2)}%</strong> (From Rs. ${stock.prevClose} to Rs. ${stock.currentClose})`);\n  }\n}\n\n// If alerts were generated, format the email and pass it to the next node.\n// If no stocks moved >2%, returning an empty array [] stops the workflow here safely.\nif (alerts.length > 0) {\n  const emailBody = `<h3>🚨 Stock Alert: Significant Movements Detected</h3><hr><br><p>${alerts.join('<br><br>')}</p>`;\n  return [{ json: { emailBody } }];\n}\n\nreturn [];"
+      },
+      "id": "f31cea22-8e05-44ea-9db5-3cca0b4d1c8d",
+      "name": "Check >2% Movement1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        -160
+      ]
+    },
+    {
+      "parameters": {
+        "sendTo": "your.email@example.com",
+        "subject": "🚨 Price Alert: >2% Movement Detected",
+        "message": "={{ $json.emailBody }}",
+        "options": {}
+      },
+      "id": "4f008994-1898-4ec8-9bb1-32fb06838d32",
+      "name": "Send Email Alert1",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1296,
+        -128
+      ],
+      "webhookId": "3ed8285c-f80f-4914-927d-fc08e1e88459",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "KZRlVJhdHNq22aH5",
+          "name": "Gmail OAuth2 API"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger1": {
+      "main": [
+        [
+          {
+            "node": "Fetch 3 Stocks (Mock)1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch 3 Stocks (Mock)1": {
+      "main": [
+        [
+          {
+            "node": "Check >2% Movement1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check >2% Movement1": {
+      "main": [
+        [
+          {
+            "node": "Send Email Alert1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "be186b22-d55f-408f-9c98-3ff77484809f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "f03342a99ba47956aa3f247eb44d71fff4faefca417bccc11b7725a8a6d90fe0"
+  },
+  "id": "3y5DOPLtCusyCBQV",
+  "tags": []
+}
